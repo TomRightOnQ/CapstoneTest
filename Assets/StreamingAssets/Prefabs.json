@@ -1,0 +1,12 @@
+[
+  {
+    "name": "DefualtObject",
+    "TypeName": "SphereObject",
+    "Count": 10,
+    "PrefabPath": "Prefabs/DefaultObject",
+    "InitialSize": 2,
+    "IsExpandable": true,
+    "XxpRatio": 1.2,
+    "Poolable": true,
+  },
+]
