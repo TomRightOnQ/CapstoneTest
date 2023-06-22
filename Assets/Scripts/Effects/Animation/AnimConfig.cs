@@ -2,7 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimConfig : ScriptableObject
+/// <summary>
+/// Reference of all 2D animation clips compiled in game
+/// </summary>
+
+[CreateAssetMenu(menuName = "GameEffect/AnimConfig")]
+public class AnimConfig : GameEffectConfig<AnimationClip>
 {
     private static AnimConfig instance = null;
 
@@ -21,37 +26,5 @@ public class AnimConfig : ScriptableObject
             }
             return instance;
         }
-    }
-
-    // Define a serializable class to store the name and the anim clip
-    [System.Serializable]
-    public class NamedAnimClip
-    {
-        public string name;
-        public AnimationClip animClip;
-    }
-
-    // Create an array of NamedAnimClip which you can populate in the Unity Editor
-    [SerializeField]
-    private NamedAnimClip[] animClips;
-
-    // Dictionary to store anim clips by name
-    private Dictionary<string, AnimationClip> animClipDictionary;
-
-    public void Init()
-    {
-        animClipDictionary = new Dictionary<string, AnimationClip>();
-
-        foreach (var namedClip in animClips)
-        {
-            animClipDictionary[namedClip.name] = namedClip.animClip;
-        }
-    }
-
-    public AnimationClip GetClip(string name)
-    {
-        AnimationClip clip;
-        animClipDictionary.TryGetValue(name, out clip);
-        return clip;
     }
 }

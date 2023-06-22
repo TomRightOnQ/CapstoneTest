@@ -1,27 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Scriptable Object defining all config files
+/// </summary>
+/// <typeparam name="TClip"></typeparam>
+
 public class GameEffectConfig<TClip> : ScriptableObject where TClip : Object
 {
-    private static GameEffectConfig<TClip> instance = null;
-
-    public static GameEffectConfig<TClip> Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = Resources.Load<GameEffectConfig<TClip>>(typeof(GameEffectConfig<TClip>).Name);
-                if (instance == null)
-                {
-                    instance = ScriptableObject.CreateInstance<GameEffectConfig<TClip>>();
-                    Debug.LogWarning("Created instance of " + typeof(GameEffectConfig<TClip>).Name + " because none was found in resources.");
-                }
-            }
-            return instance;
-        }
-    }
-
     [System.Serializable]
     public class NamedClip
     {
@@ -51,3 +37,4 @@ public class GameEffectConfig<TClip> : ScriptableObject where TClip : Object
         return clip;
     }
 }
+

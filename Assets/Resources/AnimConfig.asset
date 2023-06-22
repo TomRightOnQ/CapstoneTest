@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b2cf3ccebc3b124293d51e4d7db7414, type: 3}
-  m_Name: AudioConfig
-  m_EditorClassIdentifier: Assembly-CSharp::AudioConfig
-  clips:
-  - name: CloseShot
-    clip: {fileID: 8300000, guid: aa8eb99b4d03ff54e9144cd9b56d7308, type: 3}
+  m_Script: {fileID: 11500000, guid: ba6c4b56c785ff649806a09287e6b4f6, type: 3}
+  m_Name: AnimConfig
+  m_EditorClassIdentifier: Assembly-CSharp::AnimConfig
+  clips: []

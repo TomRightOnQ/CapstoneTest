@@ -10,6 +10,7 @@ public class SphereObject : MonoBehaviour
     public void OnEnable()
     {
         creationTime = Time.time;
+        GameEffectManager.Instance.PlayEffect<SFXObject>("CloseShot", Vector3.zero);
         Invoke("Deactivate", life);
     }
 

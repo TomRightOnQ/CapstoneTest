@@ -6,9 +6,9 @@ using UnityEngine;
 /// Reference of all audio clips compiled in game
 /// SFX and short clips
 /// </summary>
-/// 
-[CreateAssetMenu(menuName = "Audio/AudioConfig")]
-public class AudioConfig : ScriptableObject
+
+[CreateAssetMenu(menuName = "GameEffect/AudioConfig")]
+public class AudioConfig : GameEffectConfig<AudioClip>
 {
     private static AudioConfig instance = null;
 
@@ -27,39 +27,5 @@ public class AudioConfig : ScriptableObject
             }
             return instance;
         }
-    }
-
-    // Define a serializable class to store the name and the audio clip
-    [System.Serializable]
-    public class NamedAudioClip
-    {
-        public string name;
-        public AudioClip audioClip;
-    }
-
-    // Create an array of NamedAudioClip which you can populate in the Unity Editor
-    [SerializeField]
-    private NamedAudioClip[] audioClips;
-
-    // Dictionary to store audio clips by name
-    private Dictionary<string, AudioClip> audioClipDictionary;
-
-    // Initialize the audioClipDictionary from the array
-    public void Init()
-    {
-        audioClipDictionary = new Dictionary<string, AudioClip>();
-
-        foreach (var namedClip in audioClips)
-        {
-            audioClipDictionary[namedClip.name] = namedClip.audioClip;
-        }
-    }
-
-    // Method to get audio clip by name
-    public AudioClip GetClip(string name)
-    {
-        AudioClip clip;
-        audioClipDictionary.TryGetValue(name, out clip);
-        return clip;
     }
 }

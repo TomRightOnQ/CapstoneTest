@@ -6,6 +6,12 @@ public class GameEffectManager : MonoBehaviour
 {
     public static GameEffectManager Instance;
 
+    private void Start()
+    {
+        AudioConfig.Instance.Init();
+        AnimConfig.Instance.Init();
+    }
+
     private void Awake()
     {
         if (Instance == null)

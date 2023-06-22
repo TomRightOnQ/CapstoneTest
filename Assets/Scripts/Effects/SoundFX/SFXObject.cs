@@ -15,19 +15,21 @@ public class SFXObject : GameEffect
         source.clip = AudioConfig.Instance.GetClip(_name);
         if (source.clip == null)
         {
+            Debug.Log("");
             Deactivate();
         }
         else
         {
             life = source.clip.length;
             source.Play();
+            Debug.Log(life);
+            Invoke("StopPlaying", life);
             Invoke("Deactivate", life);
         }
     }
 
-    protected override void _deactivate()
+    public void StopPlaying()
     {
         source.Stop();
-        base._activate();
     }
 }

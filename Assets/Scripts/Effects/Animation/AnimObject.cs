@@ -21,13 +21,13 @@ public class AnimObject : GameEffect
             transform.position = pos;
             transform.localRotation = Quaternion.Euler(45, 0, 0);
             anim.Play();
+            Invoke("StopPlaying", life);
             Invoke("Deactivate", life);
         }
     }
 
-    protected override void _deactivate()
+    public void StopPlaying()
     {
         anim.Stop();
-        base._activate();
     }
 }
