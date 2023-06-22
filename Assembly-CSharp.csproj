@@ -64,9 +64,15 @@
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Testing\SphereObject.cs" />
     <Compile Include="Assets\Scripts\PoolingSystem\ObjPoolBase.cs" />
-    <Compile Include="Assets\Scripts\SoundFX\AudioManager.cs" />
-    <Compile Include="Assets\Scripts\SoundFX\AudioConfig.cs" />
-    <Compile Include="Assets\Scripts\SoundFX\SFXObject.cs" />
+    <Compile Include="Assets\Scripts\Effects\SoundFX\AudioManager.cs" />
+    <Compile Include="Assets\Scripts\Effects\SoundFX\AudioConfig.cs" />
+    <Compile Include="Assets\Scripts\Effects\SoundFX\SFXObject.cs" />
+    <Compile Include="Assets\Scripts\Effects\Animation\AnimObject.cs" />
+    <Compile Include="Assets\Scripts\Effects\Animation\AnimManager.cs" />
+    <Compile Include="Assets\Scripts\Effects\Animation\AnimConfig.cs" />
+    <Compile Include="Assets\Scripts\Effects\GameEffect.cs" />
+    <Compile Include="Assets\Scripts\Effects\GameEffectManager.cs" />
+    <Compile Include="Assets\Scripts\Effects\GameEffectConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -73,7 +73,7 @@ public class Pooling : MonoBehaviour
     }
 
     // Get an object or an object's class component
-    public T GetObj<T>(T prefab) where T : Component
+    public T GetObj<T>() where T : Component
     {
         var pool = GetPool<T>();
         if (pool != null)
