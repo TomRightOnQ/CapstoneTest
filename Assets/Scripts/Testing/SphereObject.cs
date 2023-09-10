@@ -9,8 +9,7 @@ public class SphereObject : MonoBehaviour
 
     public void OnEnable()
     {
-        creationTime = Time.time;
-        GameEffectManager.Instance.PlayEffect<SFXObject>("CloseShot", Vector3.zero);
+        creationTime = Time.time; 
         Invoke("Deactivate", life);
     }
 
@@ -40,7 +39,7 @@ public class SphereObject : MonoBehaviour
 
     private void _deactivate()
     {
-        Pooling.Instance.ReturnObj(this.gameObject);
         gameObject.SetActive(false);
+        Pooling.Instance.ReturnObj(this.gameObject);
     }
 }

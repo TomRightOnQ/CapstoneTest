@@ -5,7 +5,7 @@
     "Count": 10,
     "PrefabPath": "Prefabs/DefaultObject",
     "IsExpandable": true,
-    "XxpRatio": 1.2,
+    "ExpRatio": 1.2,
     "Poolable": true,
   },
   {
@@ -14,7 +14,7 @@
     "Count": 3,
     "PrefabPath": "Prefabs/SFXObject",
     "IsExpandable": true,
-    "XxpRatio": 1.2,
+    "ExpRatio": 1.2,
     "Poolable": true,
   },  
   {
@@ -23,7 +23,7 @@
     "Count": 3,
     "PrefabPath": "Prefabs/AnimObject",
     "IsExpandable": true,
-    "XxpRatio": 1.2,
+    "ExpRatio": 1.2,
     "Poolable": true,
   },
 ]

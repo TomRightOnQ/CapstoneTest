@@ -56,23 +56,28 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\PoolingSystem\PrefabManager.cs" />
-    <Compile Include="Assets\Scripts\PoolingSystem\ObjPool.cs" />
-    <Compile Include="Assets\Scripts\Configs\PrefabConfig.cs" />
-    <Compile Include="Assets\Scripts\PoolingSystem\Pooling.cs" />
+    <Compile Include="Assets\Scripts\FrameSystem\PoolingSystem\PrefabManager.cs" />
+    <Compile Include="Assets\Scripts\FrameSystem\PoolingSystem\ObjPool.cs" />
+    <Compile Include="Assets\Scripts\Contents\PrefabConfig.cs" />
+    <Compile Include="Assets\Scripts\Contents\AudioConfig.cs" />
+    <Compile Include="Assets\Scripts\Contents\Consts.cs" />
+    <Compile Include="Assets\Scripts\FrameSystem\PoolingSystem\Pooling.cs" />
+    <Compile Include="Assets\Scripts\PersistentGameManager.cs" />
     <Compile Include="Assets\Scripts\ScriptableSingleton.cs" />
-    <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\FrameSystem\EffectsSystem\GameEffectManager.cs" />
+    <Compile Include="Assets\Scripts\Contents\Enums.cs" />
+    <Compile Include="Assets\Scripts\Testing\GameManager.cs" />
+    <Compile Include="Assets\Scripts\FrameSystem\EffectsSystem\Animation\AnimObject.cs" />
+    <Compile Include="Assets\Scripts\Contents\AnimConfig.cs" />
+    <Compile Include="Assets\Scripts\FrameSystem\EffectsSystem\SoundFX\SFXObject.cs" />
+    <Compile Include="Assets\Scripts\FrameSystem\EffectsSystem\GameEffect.cs" />
     <Compile Include="Assets\Scripts\Testing\SphereObject.cs" />
-    <Compile Include="Assets\Scripts\PoolingSystem\ObjPoolBase.cs" />
-    <Compile Include="Assets\Scripts\Effects\SoundFX\AudioManager.cs" />
-    <Compile Include="Assets\Scripts\Effects\SoundFX\AudioConfig.cs" />
-    <Compile Include="Assets\Scripts\Effects\SoundFX\SFXObject.cs" />
-    <Compile Include="Assets\Scripts\Effects\Animation\AnimObject.cs" />
-    <Compile Include="Assets\Scripts\Effects\Animation\AnimManager.cs" />
-    <Compile Include="Assets\Scripts\Effects\Animation\AnimConfig.cs" />
-    <Compile Include="Assets\Scripts\Effects\GameEffect.cs" />
-    <Compile Include="Assets\Scripts\Effects\GameEffectManager.cs" />
-    <Compile Include="Assets\Scripts\Effects\GameEffectConfig.cs" />
+    <Compile Include="Assets\Scripts\FrameSystem\EffectsSystem\GameEffectConfig.cs" />
+    <Compile Include="Assets\Scripts\Contents\MusicConfig.cs" />
+    <Compile Include="Assets\Scripts\FrameSystem\BGMSystem\MusicManager.cs" />
+    <Compile Include="Assets\Scripts\FrameSystem\PoolingSystem\ObjPoolBase.cs" />
+    <Compile Include="Assets\Scripts\Contents\PrefabData.cs" />
+    <Compile Include="Assets\Scripts\Contents\General\TestData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
