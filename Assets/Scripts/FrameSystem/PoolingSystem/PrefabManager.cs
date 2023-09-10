@@ -1,7 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
-using static PrefabConfig;
 
 /// <summary>
 /// This file is manages the references of all objects, communicating with the pooling system.
@@ -12,8 +12,17 @@ public class PrefabManager : MonoBehaviour
     private static PrefabManager instance;
     public static PrefabManager Instance => instance;
 
+    // Structures to map references around
+    private Dictionary<string, PrefabData> prefabReferences = new Dictionary<string, PrefabData>();
+    private Dictionary<string, string> prefabTypes = new Dictionary<string, string>();
+    public Dictionary<string, PrefabData> PrefabReferences => prefabReferences;
+
+    [SerializeField] private const string FILE_NAME = "Prefabs.json";
+    [SerializeField] private const string SUFFIX = "(Clone)";
+
     private void Awake()
     {
+        Debug.Log("PrefabManager Awake called");
         if (instance == null)
         {
             instance = this;
@@ -48,37 +57,36 @@ public class PrefabManager : MonoBehaviour
 
     public void Init()
     {
-        PrefabConfig.Instance.InitPoolings();
+        foreach (var prefabData in PrefabConfig.Instance.PrefabCollections)
+        {
+            if (prefabData.Poolable)
+            {
+                SetPoolUp(prefabData.TypeName, prefabData.PrefabReference, prefabData.Count, prefabData.IsExpandable, prefabData.ExpandableRatio);
+                prefabReferences[prefabData.name] = prefabData;
+                prefabTypes[prefabData.name + SUFFIX] = prefabData.TypeName;
+            }
+        }
     }
 
-    // Get a reference via name
+    // Call this method at the start of your game to reset the state
+    public void ResetState()
+    {
+        prefabReferences.Clear();
+    }
+
     public GameObject GetReference(string name)
     {
-        GameObject reference = PrefabConfig.Instance.GetReference(name);
-        if (reference == null)
-        {
-            Debug.Log("Missing reference of " + name + " in PrefabConfig");
-        }
-        return reference;
+        return prefabReferences[name].PrefabReference;
     }
 
     public string GetReferenceType(string name)
     {
-        string reference = PrefabConfig.Instance.GetReferenceType(name);
-        if (reference == null)
-        {
-            Debug.Log("Missing reference of " + name + " in PrefabConfig");
-        }
-        return reference;
+        return prefabReferences[name].TypeName;
     }
 
     public string GetReferenceType(GameObject prefab)
     {
-        string reference = PrefabConfig.Instance.GetReferenceType(prefab);
-        if (reference == null)
-        {
-            Debug.Log("Missing reference of " + prefab.name + " in PrefabConfig");
-        }
-        return reference;
+        prefabTypes.TryGetValue(prefab.name, out string componentName);
+        return componentName;
     }
 }

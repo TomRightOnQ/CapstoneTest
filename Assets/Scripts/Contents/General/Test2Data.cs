@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-public static class TestData
+public static class Test2Data
 {
-    public class TestDataStruct
+    public class Test2DataStruct
     {
         public int ID;
         public string Name;
@@ -10,7 +10,7 @@ public static class TestData
         public float HP;
         public int[] BUFF;
 
-        public TestDataStruct(int id, string name, int type, float hp, int[] buff)
+        public Test2DataStruct(int id, string name, int type, float hp, int[] buff)
         {
             this.ID = id;
             this.Name = name;
@@ -19,14 +19,14 @@ public static class TestData
             this.BUFF = buff;
         }
     }
-    public static Dictionary<int, TestDataStruct> data = new Dictionary<int, TestDataStruct>
+    public static Dictionary<int, Test2DataStruct> data = new Dictionary<int, Test2DataStruct>
     {
-        {1001, new TestDataStruct(1001, "test1", 1, 5.5f, new int[]{1,2,3,4,5})},
+        {1001, new Test2DataStruct(1001, "test1", 1, 5.5f, new int[]{1,2,3,4,5})},
     };
 
-    public static TestDataStruct GetData(int id)
+    public static Test2DataStruct GetData(int id)
     {
-        if (data.TryGetValue(id, out TestDataStruct result))
+        if (data.TryGetValue(id, out Test2DataStruct result))
         {
             return result;
         }

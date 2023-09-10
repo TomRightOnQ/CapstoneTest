@@ -21,7 +21,8 @@ public class PersistentGameManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(this);
-            StartCoroutine(LoadAsync());
+            Load();
+            //StartCoroutine(LoadAsync());
         }
         else
         {
@@ -29,12 +30,10 @@ public class PersistentGameManager : MonoBehaviour
         }
     }
 
-    // Load all prefab's info table async
     // Init Managers
-    private IEnumerator LoadAsync()
+    private void Load()
     {
-        PrefabConfig.Instance.ResetState();
-        yield return StartCoroutine(PrefabConfig.Instance.LoadPrefabsAsync());
+        Debug.Log("PrefabManager Loading");
         PrefabManager.Instance.Init();
         GameEffectManager.Instance.Init();
         // SceneManager.LoadScene("MainMenu");

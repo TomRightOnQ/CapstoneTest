@@ -12,9 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0b084b7cde962c41a24f2905d32d22c, type: 3}
   m_Name: PrefabConfig
   m_EditorClassIdentifier: 
-  defaultObject:
+  prefabCollections:
+  - name: DefaultObject
+    PrefabPath: 
+    TypeName: SphereObject
+    Count: 10
+    IsExpandable: 1
+    ExpandableRatio: 1.2
+    Poolable: 1
     PrefabReference: {fileID: 1646236936794211318, guid: 9543fdb272f24674e9351245cbc38ce5, type: 3}
-    ClassComponent: {fileID: 339471181417456054, guid: 9543fdb272f24674e9351245cbc38ce5, type: 3}
+  - name: SFXObject
+    PrefabPath: 
+    TypeName: SFXObject
     Count: 3
-    IsExpandable: 0
-    ExpandableRatio: 0
+    IsExpandable: 1
+    ExpandableRatio: 1.2
+    Poolable: 1
+    PrefabReference: {fileID: 5569541797541520666, guid: d70f82feb19c28c47938de5410a06670, type: 3}
+  - name: AnimObject
+    PrefabPath: 
+    TypeName: AnimObject
+    Count: 3
+    IsExpandable: 1
+    ExpandableRatio: 1.2
+    Poolable: 1
+    PrefabReference: {fileID: 2145865682174894694, guid: 361118593c8d9ec498a388635006e256, type: 3}

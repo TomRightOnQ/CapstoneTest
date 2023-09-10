@@ -2,50 +2,93 @@ import csv
 import os
 
 '''Parse csv file to consts'''
-root_dir = os.path.join(os.path.dirname(__file__), '..', '..')  # This gets the parent directory of the script
-csv_filename = os.path.join(root_dir, 'Designs', 'Prefabs.csv')
-output_filename = os.path.join(root_dir, 'Scripts', 'Contents', 'PrefabData.cs')
 
-with open(csv_filename, 'r') as f:
-    try:
+def wrap_quotes_if_string(value, data_type):
+    if data_type == 'string':
+        return f'"{value}"'
+    elif data_type == 'float':
+        return f"{value}f"
+    elif data_type == 'int[]':
+        return f"new int[]{{{value}}}"
+    elif data_type == 'string[]':
+        return f"new string[]{{{value}}}"
+    else:
+        return value
+
+def convert_csv_to_cs(csv_filename, output_filename):
+    with open(csv_filename, 'r') as f:
         reader = csv.reader(f)
-    except:
-        print("Error to open file")
-    next(reader)  # Skip the header row
+        lines = list(reader)
+        dataHeader = lines[0]
+        dataType = lines[1]
+        lines = lines[2:]
 
-    lines = sorted(list(reader), key=lambda x: x[2])  # Sort by category
+        className = os.path.basename(csv_filename).replace('.csv', 'Data')
+        structName = className + 'Struct'
+        with open(output_filename, 'w') as outfile:
+            outfile.write('using System.Collections.Generic;\n\n')
+            outfile.write(f'public static class {className}\n')
+            outfile.write('{\n')
+            # Define MyData class
+            outfile.write(f'    public class {structName}\n')
+            outfile.write('    {\n')
+            for h, t in zip(dataHeader, dataType):
+                outfile.write(f'        public {t} {h};\n')
+            outfile.write('\n')
+        
+            # Add constructor
+            constructor_args = ', '.join([f"{t} {h.lower()}" for h, t in zip(dataHeader, dataType)])
+            constructor_body = '\n'.join([f"            this.{h} = {h.lower()};" for h in dataHeader])
+            outfile.write(f'        public {structName}({constructor_args})\n')
+            outfile.write('        {\n')
+            outfile.write(constructor_body)
+            outfile.write('\n        }\n')
+            outfile.write('    }\n')
+        
+            # Create dictionary
+            outfile.write(f'    public static Dictionary<int, {structName}> data = new Dictionary<int, {structName}>\n')
+            outfile.write('    {\n')
+        
+            for line in lines:
+                values = [wrap_quotes_if_string(value, t) for value, t in zip(line, dataType)]
+                id_value = values[0]
+                other_values = ', '.join(values[1:])
+                outfile.write(f'        {{{id_value}, new {structName}({id_value}, {other_values})}},\n')
+            outfile.write('    };\n')
 
-    with open(output_filename, 'w') as outfile:
-        outfile.write('using System.Collections;\nusing System.Collections.Generic;\nusing UnityEngine;')
-        outfile.write(f'/// <summary>')
-        outfile.write(f'/// Data: PrefabReferences')
-        outfile.write(f'/// </summary>')
-        outfile.write('public static class PrefabData\n')
-        outfile.write('{\n')
-        current_category = None
+            # Add a getter
+            outfile.write(f"""
+    public static {structName} GetData(int id)
+    {{
+        if (data.TryGetValue(id, out {structName} result))
+        {{
+            return result;
+        }}
+        else
+        {{
+            return null;
+        }}
+    }}
+""")
+            outfile.write('}\n')
 
-        line_count = 1
+    print(f"Finished converting {csv_filename} to {output_filename}")
 
-        for line in lines:
-            line_count += 1
+root_dir = os.path.join(os.path.dirname(__file__), '..', '..')
 
-            try:
-                name, type, category, value, description = line
-            except:
-                print("Error: Unable to process line", line, "on line", line_count)
-                continue
+csv_folder = os.path.join(root_dir, 'Designs', 'General')
+output_folder = os.path.join(root_dir, 'Scripts', 'Contents', 'General')
 
-            if category != current_category:
-                if current_category is not None:
-                    outfile.write('\n')
-                current_category = category
-                outfile.write(f'    // {category}\n')
+# Ensure output folder exists
+if not os.path.exists(output_folder):
+    os.makedirs(output_folder)
 
-            if type == "int":
-                outfile.write(f'    public const int {name} = {value};  // {description}\n')
-            elif type == "string":
-                outfile.write(f'    public const string {name} = "{value}";  // {description}\n')
-            else:
-                print("Error: Unable to process type", type, "on line", line_count)
-        outfile.write('}\n')
-print("Finished")
+# Loop through each csv file in the directory
+for filename in os.listdir(csv_folder):
+    if filename.endswith('.csv'):
+        csv_filename = os.path.join(csv_folder, filename)
+        output_filename = os.path.join(output_folder, filename.replace('.csv', 'Data.cs'))
+        convert_csv_to_cs(csv_filename, output_filename)
+
+# Additional code here if needed
+print("All csv files have been converted.")

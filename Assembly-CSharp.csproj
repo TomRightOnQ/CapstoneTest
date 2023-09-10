@@ -76,8 +76,8 @@
     <Compile Include="Assets\Scripts\Contents\MusicConfig.cs" />
     <Compile Include="Assets\Scripts\FrameSystem\BGMSystem\MusicManager.cs" />
     <Compile Include="Assets\Scripts\FrameSystem\PoolingSystem\ObjPoolBase.cs" />
-    <Compile Include="Assets\Scripts\Contents\PrefabData.cs" />
     <Compile Include="Assets\Scripts\Contents\General\TestData.cs" />
+    <Compile Include="Assets\Scripts\Contents\General\Test2Data.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
