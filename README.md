@@ -38,20 +38,31 @@ FrameSystem: BGM, Effect and Pooling system
 
 # 1. Pooling:
 **Pooling.cs**: Scriptable Object for the pooling itself
+
 **ObjPoolBase.cs**: Wrapper class for the generic pools
+
 **ObjPool.cs**: Generic class for each pool
+
 **PrefabConfig.cs** Scriptable Object holds references of prefabs; not recommended to call any public method from it
+
 **PrefabManager.cs**: Singleton Object contacts with **Pooling.cs and PrefabConfig.cs**. Acts as a mediator between the Pooling and PrefabConfig classes. It interfaces with PrefabConfig to get prefab data and then uses this data to communicate with the Pooling class to initialize pools for these prefabs.
 
 PrefabData:
-    **"name"**: string name of the prefab
-    **"TypeName"**: string name of the component attached to the prefab as its type
-    **"Count"**: int only works for poolable object -> indicating the inited amount in pooling system
-    "**PrefabPath"**: string path of the prefab 
-   **"IsExpandable"**: bool only works for poolable object -> determines if the pool will expand when run out
-    **"ExpRatio"**: float only works for poolable object -> determines how much the pool expand when run out
-    **"bPoolable"**: bool determines if the prefab is managed by the pooling system
-    **"bPoolByDefault"**: bool determines if the prefab is inited in the pool regardless the current scene
+**"name"**: string name of the prefab
+    
+**"TypeName"**: string name of the component attached to the prefab as its type
+    
+**"Count"**: int only works for poolable object -> indicating the inited amount in pooling system
+    
+"**PrefabPath"**: string path of the prefab 
+    
+**"IsExpandable"**: bool only works for poolable object -> determines if the pool will expand when run out
+   
+**"ExpRatio"**: float only works for poolable object -> determines how much the pool expand when run out
+    
+**"bPoolable"**: bool determines if the prefab is managed by the pooling system
+    
+**"bPoolByDefault"**: bool determines if the prefab is inited in the pool regardless the current scene
 
 >------These are now private, do not use-----------
 Pooling.Instance.GetObj(string TypeName); 
