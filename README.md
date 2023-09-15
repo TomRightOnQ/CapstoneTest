@@ -1,7 +1,7 @@
 # Project Capstone
 > This lib contains scripts prepared for the ICS169 Capstone project.
 
-**@atomREaktoR**
+**@TomRightOnQ**
 
 ## Contents:
 0.Naming and structure
