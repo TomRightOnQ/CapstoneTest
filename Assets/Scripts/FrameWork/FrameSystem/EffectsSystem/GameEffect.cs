@@ -12,7 +12,7 @@ public interface ISetup
     void SetUp(AudioClip clip, Vector3 pos);
 }
 
-public abstract class GameEffect : MonoBehaviour, ISetup
+public abstract class GameEffect : MObject, ISetup
 {
     [SerializeField] protected int id = 0;
     [SerializeField] protected float life = 1f;
@@ -48,7 +48,7 @@ public abstract class GameEffect : MonoBehaviour, ISetup
         }
         else
         {
-            Pooling.Instance.ReturnObj(this.gameObject);
+            PrefabManager.Instance.Destroy(this.gameObject);
         }
     }
 }

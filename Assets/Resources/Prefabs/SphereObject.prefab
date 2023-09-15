@@ -14,12 +14,12 @@ GameObject:
   - component: {fileID: 6571742570464337616}
   - component: {fileID: 1185243041}
   m_Layer: 0
-  m_Name: DefaultObject
+  m_Name: SphereObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &339471181417456054
 Transform:
   m_ObjectHideFlags: 0

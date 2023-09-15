@@ -2,22 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SphereObject : MonoBehaviour
+public class SphereObject : MEntity
 {
     private float life = 0.5f;
     private float creationTime;
-
-    public void OnEnable()
-    {
-        creationTime = Time.time; 
-        Invoke("Deactivate", life);
-    }
-
-    public void OnDisable()
-    {
-        CancelInvoke("Deactivate");
-        Deactivate();
-    }
 
     public void Activate()
     {
@@ -39,7 +27,6 @@ public class SphereObject : MonoBehaviour
 
     private void _deactivate()
     {
-        gameObject.SetActive(false);
-        Pooling.Instance.ReturnObj(this.gameObject);
+        PrefabManager.Instance.Destroy(this.gameObject);
     }
 }

@@ -15,14 +15,21 @@ public class PersistentGameManager : MonoBehaviour
     private static PersistentGameManager instance;
     public static PersistentGameManager Instance => instance;
 
+    private static bool bConfigReady = false;
+
     private void Awake()
     {
+        gameObject.tag = "Manager";
         if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(this);
-            Load();
-            //StartCoroutine(LoadAsync());
+            if (!bConfigReady)
+            {
+                bConfigReady = true;
+                LoadConfigs();
+            }
+            LoadManagers();
         }
         else
         {
@@ -30,12 +37,25 @@ public class PersistentGameManager : MonoBehaviour
         }
     }
 
-    // Init Managers
-    private void Load()
+    // Init Configs
+    private void LoadConfigs() 
     {
-        Debug.Log("PrefabManager Loading");
+        // Configs
+        Debug.Log("1. PrefabConfig Loading");
+        PrefabConfig.Instance.Init();
+    }
+
+    // Init Managers
+    private void LoadManagers()
+    {
+        // Managers
+        Debug.Log("1. PrefabManager Loading");
         PrefabManager.Instance.Init();
+
+        Debug.Log("2. GameEffectManager Loading");
         GameEffectManager.Instance.Init();
+
+        Debug.Log("PersistentGameManager: Ready!");
         // SceneManager.LoadScene("MainMenu");
     }
 }

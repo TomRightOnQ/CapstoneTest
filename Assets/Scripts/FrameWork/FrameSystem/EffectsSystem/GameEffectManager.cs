@@ -1,12 +1,13 @@
 using UnityEngine;
 
-public class GameEffectManager : MonoBehaviour
+public class GameEffectManager : MObject
 {
     private static GameEffectManager instance;
     public static GameEffectManager Instance => instance;
 
     private void Awake()
     {
+        gameObject.tag = "Manager";
         if (instance == null)
         {
             instance = this;

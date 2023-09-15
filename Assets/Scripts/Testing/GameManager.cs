@@ -35,6 +35,6 @@ public class GameManager : MonoBehaviour
 
     public void TakeObj()
     {
-        Pooling.Instance.GetObj(PrefabManager.Instance.GetReferenceType("DefaultObject"));        
+        PrefabManager.Instance.Instantiate("SphereObject", Vector3.zero, Quaternion.identity);     
     }
 }

@@ -23,7 +23,7 @@ public class ObjPool<T> : ObjPoolBase where T : Component
         this.prefab = prefab;
         this.objects = new Queue<T>();
         this.isExpanding = isExp;
-        this.expRatio = Mathf.Clamp(expR, 0f, 1f);
+        this.expRatio = expR;
         this.count = count;
 
         Expand(count);
@@ -57,6 +57,10 @@ public class ObjPool<T> : ObjPoolBase where T : Component
         }
 
         T objectToReturn = objects.Dequeue();
+        if (objectToReturn == null)
+        {
+            return null;
+        }
         objectToReturn.gameObject.SetActive(true);
         return objectToReturn;
     }

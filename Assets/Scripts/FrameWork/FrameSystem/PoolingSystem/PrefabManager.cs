@@ -22,7 +22,7 @@ public class PrefabManager : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("PrefabManager Awake called");
+        gameObject.tag = "Manager";
         if (instance == null)
         {
             instance = this;
@@ -30,7 +30,7 @@ public class PrefabManager : MonoBehaviour
         }
         else if (instance != this)
         {
-            Destroy(gameObject);
+            GameObject.Destroy(gameObject);
         }
     }
 
@@ -59,7 +59,7 @@ public class PrefabManager : MonoBehaviour
     {
         foreach (var prefabData in PrefabConfig.Instance.PrefabCollections)
         {
-            if (prefabData.Poolable)
+            if (prefabData.bPoolByDefault || prefabData.bPoolable)
             {
                 SetPoolUp(prefabData.TypeName, prefabData.PrefabReference, prefabData.Count, prefabData.IsExpandable, prefabData.ExpandableRatio);
                 prefabReferences[prefabData.name] = prefabData;
@@ -73,6 +73,51 @@ public class PrefabManager : MonoBehaviour
     {
         prefabReferences.Clear();
     }
+
+    // Overloading of native Instantiate
+    public GameObject Instantiate(string prefabName, Vector3 position, Quaternion rotation)
+    {
+        PrefabData prefabData = PrefabConfig.Instance.GetPrefabData(prefabName);
+        if (!prefabData.Equals(default(PrefabData)))
+        {
+            if (prefabData.bPoolable)
+            {
+                // Check if pool exists
+                if (Pooling.Instance.GetPool(prefabData.TypeName) == null)
+                {
+                    // Create new pool
+                    Pooling.Instance.CreatePool<Component>(prefabData.PrefabReference, prefabData.Count, prefabData.IsExpandable, prefabData.ExpandableRatio);
+                }
+
+                GameObject instance = Pooling.Instance.GetObj(prefabName);
+                instance.transform.position = position;
+                instance.transform.rotation = rotation;
+                instance.SetActive(true);
+                return instance;
+            }
+        }
+
+        GameObject prefab = Resources.Load<GameObject>(prefabName);
+        return GameObject.Instantiate(prefab, position, rotation);
+    }
+
+
+    public void Destroy(GameObject gameObject)
+    {
+        string prefabName = gameObject.name.Replace("(Clone)", "").Trim();
+        PrefabData prefabData = PrefabConfig.Instance.GetPrefabData(prefabName);
+        // Check if pool exists
+        if (Pooling.Instance.GetPool(prefabData.TypeName) != null)
+        {
+            if (!prefabData.Equals(default(PrefabData)) && prefabData.bPoolable)
+            {
+                Pooling.Instance.ReturnObj(gameObject);
+                return;
+            }
+        }
+        GameObject.Destroy(gameObject);
+    }
+
 
     public GameObject GetReference(string name)
     {
