@@ -101,7 +101,6 @@ This function goes to PrefabConfig to retrieve the data of a prefab, then goes b
 **AnimConfig.cs**: Child class for animation clips
 
 **GameEffectManager.cs**: Singleton manages the play of an effect
-**AnimManager.cs and AudioManager.cs**: Not working currently, may be deleted.
 
 All effects are saved in an array supporting change in the inspectors: drag the corresponding clip with a string name
 
