@@ -19,7 +19,11 @@ booleans: bIsEnabled -> start with a "b"
 Derived class: Start with parent first letter, such as (MonoBehavior) -> MObject -> MEntity -> EMonster, or (MonoBehavior) -> Object -> MEntity -> EProjectile -> EBullet
 
 Under the Assets/Designs you may see the csv/excel files and the python scripts to make C# data.
-If a C# data table contains plain data only wihtout any reference of objects, then it should be located in the Assets/Scripts/Contents/General; those csv files are under Assets/Designs/General. You can simply use ....Data.GetData(id) to acquire info.
+If a C# data table contains plain data only, then it should be under Assets/Scripts/Contents/General; those csv files are under Assets/Designs/General. You can simply use ....Data.GetData(id) to acquire info.
+
+**How to make a new C# data table?**
+Add your csv file under Assets/Designs/General, then run Assets\Designs\Tools\LoadConstants.bat
+This will generate C# table for general data and constants
 
 Inside Assets/Scripts/Contents, ....Data.cs indicates a file of data table loaded from csv file, and ....Config.cs indicates a scriptable object located in Resources folder that is maintained in the inspector.
 
