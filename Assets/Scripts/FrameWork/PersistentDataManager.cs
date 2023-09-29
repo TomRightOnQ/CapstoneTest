@@ -12,7 +12,6 @@ public class PersistentDataManager : MonoBehaviour
 {
     private static PersistentDataManager instance;
     public static PersistentDataManager Instance => instance;
-
     private long MObjectID = -1;
 
     private void Awake()

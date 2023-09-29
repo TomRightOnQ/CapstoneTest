@@ -8,6 +8,9 @@ using UnityEngine;
 
 public class MEntity : MObject
 {
+    // If the entity is considered in damage system
+    protected bool bDamagable = false;
+
     // End an entity
     public virtual void DeactivateEntity()
     {

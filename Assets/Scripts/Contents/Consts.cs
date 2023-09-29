@@ -1,4 +1,4 @@
-public static class EConstants
+public static class Constants
 {
     // C1
     public const int TEST_INT_C1 = 1;  // A normal value
